@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Score Checker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════ AUTH PAGE ═══════════════ -->
+  <div id="authPage">
+    <div class="auth-container">
+      <div class="auth-brand">🎓 ScoreCheck</div>
+      <p class="auth-tagline">Student GPA & Placement Eligibility Portal</p>
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">Login</button>
+        <button class="tab-btn" id="tabSignup" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="loginForm">
+        <div class="field-group">
+          <input type="text" id="loginUser" placeholder="Username or Email" />
+        </div>
+        <div class="field-group pass-wrap">
+          <input type="password" id="loginPass" placeholder="Password" />
+          <span class="eye" onclick="togglePass('loginPass', this)">👁</span>
+        </div>
+        <p class="forgot-link"><a href="#" onclick="forgotPassword()">Forgot password?</a></p>
+        <button class="auth-btn" onclick="doLogin()">Login</button>
+
+        <div class="divider"><span>or sign in with</span></div>
+        <div class="social-row">
+          <button class="social-btn" onclick="demoLogin('google')" title="Google">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="G" />Google
+          </button>
+          <button class="social-btn" onclick="demoLogin('github')" title="GitHub">
+            <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="GH" />GitHub
+          </button>
+          <button class="social-btn" onclick="demoLogin('microsoft')" title="Microsoft">
+            <img src="https://www.svgrepo.com/show/452124/microsoft.svg" alt="MS" />Microsoft
+          </button>
+        </div>
+      </div>
+
+      <!-- SIGNUP -->
+      <div id="signupForm" style="display:none;">
+        <div class="field-group">
+          <input type="text" id="regName" placeholder="Full Name" />
+        </div>
+        <div class="field-group">
+          <input type="text" id="regUser" placeholder="Username" />
+        </div>
+        <div class="field-group">
+          <input type="email" id="regEmail" placeholder="Email Address" />
+        </div>
+        <div class="field-group pass-wrap">
+          <input type="password" id="regPass" placeholder="Password (min 6 chars)" />
+          <span class="eye" onclick="togglePass('regPass', this)">👁</span>
+        </div>
+        <div class="field-group pass-wrap">
+          <input type="password" id="regConfirm" placeholder="Confirm Password" />
+          <span class="eye" onclick="togglePass('regConfirm', this)">👁</span>
+        </div>
+        <button class="auth-btn" onclick="doSignup()">Create Account</button>
+
+        <div class="divider"><span>or sign up with</span></div>
+        <div class="social-row">
+          <button class="social-btn" onclick="demoLogin('google')" title="Google">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="G" />Google
+          </button>
+          <button class="social-btn" onclick="demoLogin('github')" title="GitHub">
+            <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="GH" />GitHub
+          </button>
+          <button class="social-btn" onclick="demoLogin('microsoft')" title="Microsoft">
+            <img src="https://www.svgrepo.com/show/452124/microsoft.svg" alt="MS" />Microsoft
+          </button>
+        </div>
+      </div>
+
+      <div id="authMsg" class="auth-msg"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MAIN APP ═══════════════ -->
+  <div id="appPage" style="display:none;">
+
+    <nav>
+      <div class="logo">🎓 ScoreCheck</div>
+      <span class="nav-sub">GPA & Placement Eligibility</span>
+      <div class="nav-user">
+        <div class="avatar-circle" id="avatarCircle"></div>
+        <span id="navUserName"></span>
+        <button class="logout-btn" onclick="doLogout()">Logout</button>
+      </div>
+    </nav>
+
+    <main>
+      <section class="card">
+        <h2>Student Information</h2>
+        <div class="row">
+          <input type="text" id="studentName" placeholder="Student Name" />
+          <input type="text" id="rollNo" placeholder="Roll Number" />
+          <select id="numSemesters">
+            <option value="">Select Semesters</option>
+            <option>1</option><option>2</option><option>3</option>
+            <option>4</option><option>5</option><option>6</option>
+            <option>7</option><option>8</option>
+          </select>
+          <button onclick="generateSemesters()">Generate Score Sheet</button>
+        </div>
+      </section>
+
+      <div id="semesterContainer"></div>
+
+      <div id="calcBtn" style="display:none; text-align:center; margin:1rem 0;">
+        <button class="calc-btn" onclick="calculate()">🧮 Calculate GPA & CGPA</button>
+      </div>
+
+      <section class="card" id="resultSection" style="display:none;">
+        <h2>📊 Results</h2>
+        <div class="student-meta" id="studentMeta"></div>
+        <div id="semesterResults"></div>
+        <div class="cgpa-box" id="cgpaBox"></div>
+        <div class="placement-box" id="placementBox"></div>
+        <div style="text-align:center; margin-top:1rem;">
+          <button onclick="window.print()">🖨️ Print / Save as PDF</button>
+        </div>
+      </section>
+    </main>
+
+    <footer><p>&copy; 2025 ScoreCheck. All rights reserved.</p></footer>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
